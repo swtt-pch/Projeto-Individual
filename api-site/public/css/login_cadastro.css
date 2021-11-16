@@ -72,6 +72,15 @@ section {
     transition: 2s;
 }
 
+.cadastro .titulo{
+    position: absolute;
+    top: -40px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 44px;
+    color: #21252B;
+}
 
 .cadastro img{
     position: absolute;
@@ -156,6 +165,16 @@ section {
     right: 80px;
     overflow-y: visible;
     width: 650px;
+}
+
+.login .titulo{
+    position: absolute;
+    top: -40px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 44px;
+    color: #21252B;
 }
 
 .login .container {
