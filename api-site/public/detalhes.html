@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/like.js"></script>
+</head>
+<body onload="exibirDetalhes()">
+    
+
+    <textarea id="comentario_input" name="comentario_input" rows="5" cols="33" maxlength="200"></textarea>
+    <button onclick="comentar()">Comentar</button>
+    <div id="comentarios"></div>
+    <div onclick="" id="coracao-like" style="width: 100px; height: 100px;"></div>
+</body>
+</html>
+<script>
+
+    function comentar(){
+        var comentarioVar = document.getElementById("comentario_input").value
+        var idVar = sessionStorage.ID_USUARIO
+        var postVar = sessionStorage.ID_POST
+        fetch("usuarios/comentar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                comentarioServer: comentarioVar,
+                idServer: idVar,
+                postServer: postVar
+            })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                window.location = "detalhes.html";
+            }else {
+                throw ("Houve um erro ao tentar comentar");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function exibirDetalhes(){
+        var idPost = sessionStorage.ID_POST;
+        fetch(`/eventos/detalhar/${idPost}`).then(function(resposta){
+            resposta.json().then(function(resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i]
+                    document.body.innerHTML+= `<p>${publicacao}</p>`
+                }
+            }).catch(
+                function(erro){
+                    console.log(erro)
+                }
+            )
+        })
+
+        exibirComentarios();
+        mostrarGostou();
+    }
+
+    function exibirComentarios() {
+        var idPost = sessionStorage.ID_POST;
+        fetch(`/eventos/exibirComentarios/${idPost}`).then(function(resposta){
+            resposta.json().then(function(resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+                document.getElementById("comentarios").innerHTML = ""
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i]
+                    document.getElementById("comentarios").innerHTML+= `<p><b>${publicacao.nome}(${publicacao.quando}): </b>${publicacao.comentario}</p>`
+                }
+            }).catch(
+                function(erro){
+                    console.log(erro)
+                }
+            )
+        })
+    }   
+
+    
+</script>

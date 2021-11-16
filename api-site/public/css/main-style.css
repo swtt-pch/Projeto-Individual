@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --marrom: (#80471F);
+    --cinza: (#242424);
+    --laranja: (#FF8E3C);
+    --branco: (#FFFFFE);
+    --gelo: (#EFF0F3);
+    --preto: (#0D0D0D);
+}
+
+*{
+    margin: 0 0;
+    font-family: 'Mulish', sans-serif;
+}
+
+header{
+    width: 100%;
+}
+
+.acessos{
+    width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: flex-end; 
+  background-color: #FF8E3C; 
+}
+
+
+.acessos ul{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0;
+}
+
+.acessos ul li a{
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    color: #EFF0F3;
+    transition: 0.2s;
+}
+
+.acessos ul li h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 31px;
+    color: #80471F;
+}
+
+.acessos ul li .selected{
+    font-weight: bold;
+    color: #80471F;
+}
+
+.acessos ul li a:hover {
+    color: #80471F;
+    font-weight: 600;
+}
+
+.acessos ul .visitas{
+    margin-left: 92px;
+}
+
+
+.container{
+    width: 1150px;
+    margin: 0 auto;
+}
+
+footer {
+    background-color: #242424;
+    height: 70px;
+    width: 100%;
+    display: flex;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-container p {
+    align-self: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: #DADDDF;
+}
+
+
+.footer-container ul {
+    width: 180px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

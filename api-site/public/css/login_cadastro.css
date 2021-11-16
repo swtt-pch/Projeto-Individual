@@ -1,0 +1,243 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: -2;
+}
+
+header{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+header .container .goback{
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+header .container #index-img{
+    width: 57px;
+    height: 40px;
+    background-image: url(../assets/icon/goback-bw.png);
+    background-size:contain;
+    transition: 0.2s;
+}
+
+header .container .goback span{
+    margin-left: 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #B2B6BB;
+    transition: 0.2s;
+}
+
+header .container .goback:hover > #index-img {
+    background-image: url(../assets/icon/goback-colored.png);
+    transition: 0.2s;
+}
+
+header .container .goback:hover > span{
+    color: #80471F;
+    transition: 0.2s;
+}
+
+section {
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    overflow-x: hidden;
+    overflow-y: visible;
+    position: absolute;
+    top: 0;
+    transition: 5s;
+}
+
+.cadastro{
+    background-color: rgba(255, 142, 60, 0.6);
+    width: 100%;
+    height: 320px;
+    overflow-y: visible;
+    margin-left: -100%;
+    position: absolute;
+    transition: 2s;
+}
+
+
+.cadastro img{
+    position: absolute;
+    bottom: -30px;
+    left: 80px;
+    overflow-y: visible;
+    width: 650px;
+}
+
+.cadastro .container {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    overflow-y: visible;
+}
+
+.cadastro .container .form_cadastro{
+    display: flex;
+    height: 100%;
+    width: 330px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: 0;
+    align-content: space-around;
+    align-items: flex-start;
+}
+
+
+.cadastro .container .form_cadastro button {
+    width: 137px;
+    height: 47px;
+    background: #3F4249;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 15px;
+    text-align: center;
+    color: #DADDDF;
+}
+
+.cadastro .container .form_cadastro .log-acess{
+    width: 140px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cadastro .container .form_cadastro .log-acess p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #000000;
+}
+
+.cadastro .container .form_cadastro .log-acess a{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #80471F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cadastro .container .form_cadastro .log-acess a:hover{
+    font-weight: bold;
+}
+
+.login{
+    width: 100%;
+    height: 320px;
+    overflow-y: visible;
+    position: relative;
+    background-color: rgba(255, 142, 60, 0.6);
+    transition: 2s;
+}
+
+
+.login img{
+    position: absolute;
+    bottom: -30px;
+    right: 80px;
+    overflow-y: visible;
+    width: 650px;
+}
+
+.login .container {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow-y: visible;
+}
+
+.login .container .form_login{
+    display: flex;
+    height: 60%;
+    width: 330px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 0;
+    align-items: center;
+    align-content: space-around;
+}
+
+.login .container .form_login button{
+    width: 137px;
+    height: 47px;
+    background: #3F4249;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 15px;
+    text-align: center;
+    color: #DADDDF;
+}
+
+.login .container .form_login .cad-acess{
+    width: 140px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.login .container .form_login .cad-acess p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #000000;
+}
+
+.login .container .form_login .cad-acess a{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #80471F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login .container .form_login .cad-acess a:hover{
+    font-weight: bold;
+}
+
+section .input_container{
+    position: relative;
+    width: 330px;
+    height: 40px;
+}
+
+.input_container label{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #B2B6BB;
+}
+
+section input{
+    width: 330px;
+    padding: 0 0;
+    border: 0;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 3px solid #B2B6BB;
+}
+
+

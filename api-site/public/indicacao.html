@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicações</title>
+    
+</head>
+<body>
+     <div>
+         <label for="nome_input">*nome do evento</label>
+         <input type="text" id="nome_input" name="nome_input">
+         <label for="valor_input">Valor</label>
+         <input type="text" id="valor_input" name="valor_input">
+         <label for="tipo_input">*Tipo de evento</label>
+         <select name="tipo_input" id="tipo_input">
+             <option value="Concertos/Shows">Concertos/Shows</option>
+             <option value="Exposições/Museus">Exposições/Museus</option>
+             <option value="Restaurantes/Cafeterias">Restaurantes/Cafeterias</option>
+             <option value="Livrarias/Estreias">Livrarias/Estreias</option>
+         </select>
+     </div>
+     <div>
+        <label for="cep_input">*CEP</label>
+        <input type="text" id="cep_input" name="cep_input">
+        <label for="logradouro_input">Logradouro</label>
+        <input type="text" id="logradouro_input" name="logradouro_input">
+        <label for="bairro_input">Bairro</label>
+        <input type="text" name="bairro_input" id="bairro_input">
+        <label for="numero_input">*Número</label>
+        <input type="text" name="numero_input" id="numero_input">
+        <label for="cidade_input">Cidade</label>
+        <input type="text" name="cidade_input" id="cidade_input">
+        <label for="uf_input">Estado</label>
+        <input type="text" name="uf_input" id="uf_input">
+    </div>
+    <button onclick="publicar()">Enviar</button>
+</body>
+</html>
+<script>
+
+    function teste(){
+
+        fetch(`indicacoes/`).then(function(resposta){
+            console.log("deu: ", resposta)
+        })
+
+    }
+
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        var corpo = {
+            nome: nome_input.value,
+            valor: valor_input.value,
+            tipo: tipo_input.value,
+            cep: cep_input.value,
+            numero: numero_input.value
+        }
+
+        console.log(corpo)
+
+        fetch(`/indicacoes/inserir/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function(resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "eventos.html";
+                
+            }else if (resposta.status == 404) {
+                window.alert("Deu 404!"); 
+            }else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function(resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        })
+    }
+
+    function validar(nome, tipo, cep, numero) {
+        if (nome == "" && tipo == "" && cep == "" && numero == "") {
+            return false;
+        }
+    }
+</script>

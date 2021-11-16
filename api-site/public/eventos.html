@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <script src="js/like.js"></script>
+</head>
+<body onload="carregarEventos()">
+    <div class="card">
+        
+    </div>
+</body>
+</html>
+<script>
+    function testar(){
+        fetch(`eventos/`).then(function(resposta){
+            console.log("deu: ", resposta.send)
+        })
+    }
+
+    function carregarEventos(){
+        fetch("/eventos/listar").then(function(resposta){
+            if (resposta.ok) {
+                if(resposta.status == 204){
+                    document.body.innerHTML = "<h1>NENHUM POST ENCONTRADO</h1>"
+                }
+            }
+            
+            resposta.json().then(function(resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var cards = document.querySelector('.card')
+                cards.innerHTML = "";
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i]
+                    cards.innerHTML+= `<button onclick='detalharEvento(${publicacao.id_post})' >${publicacao.id_post}</button>`
+                }
+            })
+        })
+    }
+
+    function detalharEvento(idPost) {
+        sessionStorage.ID_POST = idPost;
+        window.location.href = `detalhes.html`;
+    }
+</script>
