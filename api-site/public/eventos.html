@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
     <script src="js/like.js"></script>
+    <link rel="stylesheet" href="./css/eventos.css">
+    <link rel="stylesheet" href="./css/main-style.css">
 </head>
 <body onload="carregarEventos()">
-    <div class="card">
+    <div class="viewCards">
         
     </div>
 </body>
 </html>
 <script>
+
+
     function testar(){
         fetch(`eventos/`).then(function(resposta){
             console.log("deu: ", resposta.send)
@@ -27,16 +31,23 @@
                     document.body.innerHTML = "<h1>NENHUM POST ENCONTRADO</h1>"
                 }
             }
-            
             resposta.json().then(function(resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                var cards = document.querySelector('.card')
+                var cards = document.querySelector('.viewCards')
                 cards.innerHTML = "";
                 for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i]
-                    cards.innerHTML+= `<button onclick='detalharEvento(${publicacao.id_post})' >${publicacao.id_post}</button>`
+                    let publicacao = resposta[i]
+                    criarCard(cards, publicacao, i)
+                    //cards.innerHTML+= `<button onclick='detalharEvento(${publicacao.id_post})' >${publicacao.id_post}</button>`
                 }
+                for (let i = 0; i < resposta.length; i++) {
+                    let publicacao = resposta[i]
+                    let heart = document.getElementById(`heart${i}`)
+                    mostrarGostou(heart, parseInt(sessionStorage.ID_USUARIO), publicacao.id_post)
+                    //cards.innerHTML+= `<button onclick='detalharEvento(${publicacao.id_post})' >${publicacao.id_post}</button>`
+                }
+
             })
         })
     }
@@ -44,5 +55,32 @@
     function detalharEvento(idPost) {
         sessionStorage.ID_POST = idPost;
         window.location.href = `detalhes.html`;
+    }
+
+    function criarCard(cards, publicacao, i) {
+        let card = document.createElement('div');
+        card.setAttribute('class', 'card')
+        let img = document.createElement('img')
+        //temporario
+        img.setAttribute('class', 'img')
+        img.src = './assets/imgs/teste.jpg'
+        let innerShadow = document.createElement('div')
+        innerShadow.setAttribute('class', 'innershadow')
+        let tituloCard = document.createElement('div')
+        tituloCard.setAttribute('class', 'tituloCard')
+        innerShadow.appendChild(tituloCard)
+        let btn = document.createElement('button')
+        let heart = document.createElement('div')
+        heart.setAttribute('class', 'heart')
+        btn.setAttribute('id', `heart${i}`)
+        //btn.setAttribute('onload', `mostrarGostou(this, ${sessionStorage.ID_USUARIO}, ${publicacao.id_post})`)
+        btn.appendChild(heart)
+        innerShadow.appendChild(btn)
+        card.appendChild(img)
+        card.appendChild(innerShadow)
+        let t = document.createTextNode(publicacao.titulo)
+        tituloCard.appendChild(t)
+        cards.appendChild(card)
+        img.setAttribute('onclick', `detalharEvento(${publicacao.id_post})`)
     }
 </script>

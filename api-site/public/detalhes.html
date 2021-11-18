@@ -7,13 +7,13 @@
     <title>Document</title>
     <script src="js/like.js"></script>
 </head>
-<body onload="exibirDetalhes()">
+<body >
     
 
     <textarea id="comentario_input" name="comentario_input" rows="5" cols="33" maxlength="200"></textarea>
     <button onclick="comentar()">Comentar</button>
     <div id="comentarios"></div>
-    <div onclick="" id="coracao-like" style="width: 100px; height: 100px;"></div>
+    <div onload="exibirDetalhes(this, sessionStorage.ID_USUARIO, sessionStorage.ID_POST)" id="heart" style="width: 100px; height: 100px;"></div>
 </body>
 </html>
 <script>

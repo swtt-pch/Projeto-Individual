@@ -1,29 +1,30 @@
-function mostrarGostou() {
-    var usuario = sessionStorage.ID_USUARIO;
-    var post = sessionStorage.ID_POST;
-    fetch(`/eventos/mostrarGostou/${usuario},${post}`).then(function(resposta){
-        resposta.json().then(function(resposta) {
-            if(resposta[0].gostei == 0){
-                document.getElementById("coracao-like").setAttribute("onclick", "sgostei()")
-                document.getElementById("coracao-like").style.backgroundColor = "red"
-            } else if(resposta[0].gostei >= 1) {
-                document.getElementById("coracao-like").setAttribute("onclick", "ngostei()")
-                document.getElementById("coracao-like").style.backgroundColor = "blue"
-            } else if(resposta[0].gostei == []){
-                document.getElementById("coracao-like").setAttribute("onclick", "gostei()")
-                document.getElementById("coracao-like").style.backgroundColor = "red"
+function mostrarGostou(heart, usuario, post) {
+    fetch(`/eventos/mostrarGostou/${usuario},${post}`)
+        .then(function(resposta){
+            if (resposta.status == 204) {
+                heart.setAttribute("onclick", `gostei(this,${usuario},${post})`)
+                heart.style.background = "url(assets/icon/heartoff.png)"
+            } else if(resposta.status == 200){
+                resposta.json().then(function(resposta) {
+                    if(resposta[0].gostei == 0){
+                        heart.setAttribute("onclick", `sgostei(this,${usuario},${post})`)
+                        heart.style.background = "url(assets/icon/heartoff.png)"
+                    } else if(resposta[0].gostei >= 1) {
+                        heart.setAttribute("onclick", `ngostei(this,${usuario},${post})`)
+                        heart.style.background = "url(assets/icon/hearton.png)"
+                    } else if(resposta[0].gostei == []){
+                    }
+                }).catch(
+                    function(erro){
+                        console.log(erro)
+                        console.log(resposta)
+                    }
+                )
             }
-        }).catch(
-            function(erro){
-                console.log(erro)
-            }
-        )
-    })
+        })
 }
 
-function gostei() {
-    var usuario = sessionStorage.ID_USUARIO;
-    var post = sessionStorage.ID_POST;
+function gostei(heart, usuario, post) {
     fetch("/eventos/gostei", {
         method: "POST",
         headers: {
@@ -34,7 +35,7 @@ function gostei() {
             idPost: post
         })
     }).then(function(resposta){
-        resposta.json().then(mostrarGostou()).catch(
+        resposta.json().then(mostrarGostou(heart, usuario, post)).catch(
             function(erro){
                 console.log(erro)
             }
@@ -42,9 +43,7 @@ function gostei() {
     })
 }
 
-function sgostei() {
-    var usuario = sessionStorage.ID_USUARIO;
-    var post = sessionStorage.ID_POST;
+function sgostei(heart, usuario, post) {
     fetch("/eventos/sgostei", {
         method: "POST",
         headers: {
@@ -56,7 +55,7 @@ function sgostei() {
         })
     }).then(function(resposta){
         resposta.json()
-            .then(mostrarGostou()).catch(
+            .then(mostrarGostou(heart, usuario, post)).catch(
                 function(erro){
                     console.log(erro)
                 }
@@ -64,9 +63,7 @@ function sgostei() {
     })
 }
 
-function ngostei() {
-    var usuario = sessionStorage.ID_USUARIO;
-    var post = sessionStorage.ID_POST;
+function ngostei(heart, usuario, post) {
     fetch("/eventos/ngostei", {
         method: "POST",
         headers: {
@@ -78,7 +75,7 @@ function ngostei() {
         })
     }).then(function(resposta){
         resposta.json().then(
-            mostrarGostou()
+            mostrarGostou(heart, usuario, post)
         ).catch(
             function(erro){
                 console.log(erro)

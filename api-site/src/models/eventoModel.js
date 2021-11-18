@@ -11,7 +11,7 @@ function detalhar(idPost) {
 
 function listar() {
     var instrucao = `
-    select id_post, id_evento from post;
+    select p.id_post, e.id_evento, titulo from post p join evento e on p.id_evento = e.id_evento;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
