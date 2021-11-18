@@ -14,8 +14,83 @@
     font-family: 'Mulish', sans-serif;
 }
 
-header{
+body{
+    padding: 0 0;
+    margin: 0 0;
+}
+
+header {
+    position: relative;
     width: 100%;
+    height: 70px;
+    box-shadow: 0px 15px 100px rgba(0, 0, 0, 0.25);
+
+}
+
+header .gelo{
+    position: absolute;
+    width: 43.9%;
+    height: 70px;
+    background-color: #F5F5F5;
+    left: 0;
+    top: 0;
+}
+
+header .gelo .container {
+    width: calc(1150px*0.439);
+    margin-right: 0;
+    height: 100%;
+}
+
+header .gelo .container .goback{
+    height: 100%;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+header .gelo .container .goback #img{
+    width: 36.01px;
+    height: 49px;
+    background-image: url(../assets/icon/logobw.png);
+    background-size:contain;
+    transition: 0.2s;
+}
+
+header .container .goback:hover > #img {
+    background-image: url(../assets/icon/logocolored.png);
+    transition: 0.2s;
+}
+
+header .container .goback:hover > span{
+    color: #80471F;
+    transition: 0.2s;
+}
+
+header .gelo .container span{
+    margin-left: 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #B2B6BB;
+    transition: 0.2s;
+}
+
+header .laranja {
+    position: absolute;
+    width: 56.1%;
+    background-color: #FF8E3C;
+    right: 0;
+    top: 0;
+    height: 70px;
+}
+
+header .laranja .container{
+    width: calc(1150px*0.561);
+    margin-left: 0;
 }
 
 .acessos{
@@ -105,4 +180,43 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.footer-container ul a div{
+    width: 30px;
+    height: 30px;
+    transition: 0.2s;
+}
+
+.footer-container ul a #insta{
+    background-image: url(../assets/icon/instagram.png);
+}
+
+.footer-container ul a #insta:hover{
+    background-image: url(../assets/icon/instagramcolored.png);
+}
+
+.footer-container ul a #email{
+    background-image: url(../assets/icon/email.png);
+    height: 22.5px;
+}
+
+.footer-container ul a #email:hover{
+    background-image: url(../assets/icon/emailcolored.png);
+}
+
+.footer-container ul a #git{
+    background-image: url(../assets/icon/github.png);
+}
+
+.footer-container ul a #git:hover{
+    background-image: url(../assets/icon/githubcolored.png);
+}
+
+.footer-container ul a #linked{
+    background-image: url(../assets/icon/linkedin.png);
+}
+
+.footer-container ul a #linked:hover{
+    background-image: url(../assets/icon/linkedincolored.png);
 }

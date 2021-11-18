@@ -5,37 +5,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indicações</title>
-    
+    <link rel="stylesheet" href="./css/main-style.css">
+    <link rel="stylesheet" href="./css/indicacoes.css">
+    <script src="./js/funcoes.js"></script>
 </head>
-<body>
-     <div>
-         <label for="nome_input">*nome do evento</label>
-         <input type="text" id="nome_input" name="nome_input">
-         <label for="valor_input">Valor</label>
-         <input type="text" id="valor_input" name="valor_input">
-         <label for="tipo_input">*Tipo de evento</label>
-         <select name="tipo_input" id="tipo_input">
-             <option value="Concertos/Shows">Concertos/Shows</option>
-             <option value="Exposições/Museus">Exposições/Museus</option>
-             <option value="Restaurantes/Cafeterias">Restaurantes/Cafeterias</option>
-             <option value="Livrarias/Estreias">Livrarias/Estreias</option>
-         </select>
-     </div>
-     <div>
-        <label for="cep_input">*CEP</label>
-        <input type="text" id="cep_input" name="cep_input">
-        <label for="logradouro_input">Logradouro</label>
-        <input type="text" id="logradouro_input" name="logradouro_input">
-        <label for="bairro_input">Bairro</label>
-        <input type="text" name="bairro_input" id="bairro_input">
-        <label for="numero_input">*Número</label>
-        <input type="text" name="numero_input" id="numero_input">
-        <label for="cidade_input">Cidade</label>
-        <input type="text" name="cidade_input" id="cidade_input">
-        <label for="uf_input">Estado</label>
-        <input type="text" name="uf_input" id="uf_input">
-    </div>
-    <button onclick="publicar()">Enviar</button>
+<body onload="validarSessao()">
+    <header>
+        <div class="gelo">
+            <div class="container">
+                <div class="goback" onclick="window.location = './index.html'">
+                    <div id="img">
+    
+                    </div>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+        </div>
+        <div class="laranja">
+            <div class="container">
+                <div class="acessos">
+                    <ul>
+                        <li class="visitas"><a class="a_visita" href="./eventos.html">VISITAS</a></li>
+                        <li><a class="a_indicacao" href="./indicacao.html">INDICAÇÃO</a></li>
+                        <li id="h1_usuario"><a href="./">ENTRAR / CADASTRAR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="form">
+                <h1>Conhece algum evento legal? Me indica ai!</h1>
+                    <h2 id="subtitulo1">Informações do evento</h2>
+                    <div class="input-box">
+                        <input type="text" id="nome_input" name="nome_input" placeholder="*Nome do evento">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="valor_input" name="valor_input" placeholder="Valor">
+                    </div>
+                    <div class="input-box">
+                        <select name="tipo_input" id="tipo_input">
+                            <option value="" disabled selected>*Tipo de evento</option>
+                            <option value="Concertos/Shows">Concertos/Shows</option>
+                            <option value="Exposições/Museus">Exposições/Museus</option>
+                            <option value="Restaurantes/Cafeterias">Restaurantes/Cafeterias</option>
+                            <option value="Livrarias/Estreias">Livrarias/Estreias</option>
+                        </select>
+                    </div>
+                    <h2 id="subtitulo2">Localização</h2>
+                    <div class="input-box">
+                        <input type="text" id="cep_input" name="cep_input" placeholder="*CEP">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="logradouro_input" name="logradouro_input" placeholder="*Rua">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="bairro_input" id="bairro_input" placeholder="*Bairro">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="numero_input" id="numero_input" placeholder="*Número">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="cidade_input" id="cidade_input" placeholder="*Cidade">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="uf_input" id="uf_input" placeholder="*Estado">
+                    </div>
+                <button onclick="publicar()">Enviar</button>
+            </div>
+            <div class="img">
+                <img src="./assets/imgs/Group 9.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>Criado por Igor Gomes </p>
+                <ul>
+                    <li><a href="https://www.instagram.com/swttpch/"><div id="insta" ></div></a></li>
+                    <li><a href="mailto:i.greygomes3@outlook.com"><div id="email" ></div></a></li>
+                    <li><a href="https://github.com/swtt-pch/"><div id="git" ></div></a></li>
+                    <li><a href="https://www.linkedin.com/in/igorluizgomes3/"><div id="linked"></div></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 <script>
