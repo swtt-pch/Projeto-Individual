@@ -5,9 +5,16 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
+    var nav_bar = document.getElementById("nav_bar_list");
     var h1Usuario = document.getElementById("h1_usuario");
     var indicacao = document.querySelectorAll(".a_indicacao")
     var visita = document.querySelectorAll(".a_visita")
+    var sair = document.createElement("li")
+    var link = document.createElement("a")
+    link.setAttribute('href', 'index.html')
+    link.setAttribute('onclick', 'limparSessao()')
+    link.innerHTML = "SAIR";
+    sair.appendChild(link)
 
     if (email != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
@@ -26,7 +33,8 @@ function validarSessao() {
                 a.setAttribute("href", "./eventos.html")
             });
         }
-        // finalizarAguardar();
+
+        nav_bar.appendChild(sair)
     } else {
         return false
     }
