@@ -7,6 +7,7 @@
     <title>Indicações</title>
     <link rel="stylesheet" href="./css/main-style.css">
     <link rel="stylesheet" href="./css/indicacoes.css">
+    <link rel="stylesheet" href="./css/background.css">
     <script src="./js/funcoes.js"></script>
 </head>
 <body onload="validarSessao()">
@@ -16,7 +17,7 @@
             <p>
                 Muito obrigado por indicar esse evento!!! <br>
                 Ele foi armazenado em meu banco de dados e poderá ser o próximo local que visitarei. <br>
-                Sinta-se a vontadade para volrar ara a página inicial ou ir para a pagina de eventos.
+                Sinta-se a vontadade para voltar ara a página inicial ou ir para a pagina de eventos.
             </p>
             <a href="index.html">INICIO</a> <a href="./eventos.html">EVENTOS</a>
         </div>
@@ -109,22 +110,7 @@
 </html>
 <script>
 
-    function buscarDados(x) {
-        fetch(`https://viacep.com.br/ws/${x}/json/`)
-        .then(function(resultado) {
-            resultado.json()
-            .then(function(json){
-                console.log(json)
-                document.getElementById('logradouro_input').value = json.logradouro
-                document.getElementById('bairro_input').value = json.bairro
-                document.getElementById('cidade_input').value = json.localidade
-                document.getElementById('uf_input').value = json.uf
-            })
-            .catch(function(error) {
-                console.log(error)
-            })
-        })
-    }
+
 
 
     function teste(){

@@ -7,11 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/login_cadastro.css">
     <link rel="stylesheet" href="./css/main-style.css">
+    <link rel="stylesheet" href="./css/background.css">
     <title>Autenticação</title>
 
     <script src="./js/funcoes.js"></script>
     <script src="./js/login_cadastro.js"></script>
 <body>
+    <div class="background">
+        <div class="alert">
+            <h1>Cadastro realizado com sucesso!</h1>
+            <p>
+                Agora voê faz parte dessa plataforma!!! <br>
+                Sinta-se a vontadade para voltar ara a página inicial ou ir para a pagina de eventos.
+            </p>
+            <a href="index.html">INICIO</a> <a href="./eventos.html">EVENTOS</a>
+        </div>
+    </div>
     <header>
         <div class="container">
             <div class="goback" onclick="window.location = './index.html'">
@@ -27,14 +38,13 @@
             <img src="./assets/imgs/Group 7.png">
             <div class="container">
                 <h1 class="titulo">ENTRAR</h1>
+                <span class="login_erro"></span>
                 <div class="form_login">
                     <div class="input_container">
-                        <label for="email_entrar">E-mail: </label>
-                        <input id="email_entrar" type="text">
+                        <input id="email_entrar" type="text" placeholder="E-mail">
                     </div>
                     <div class="input_container">
-                        <label for="senha_entrar">Senha:</label>
-                        <input id="senha_entrar" type="password">
+                        <input id="senha_entrar" type="password" placeholder="Senha">
                     </div>
                     <div class="cad-acess acess">
                         <p>Não possui um cadastro?</p>
@@ -48,27 +58,24 @@
             <img src="./assets/imgs/Group 8.png">
             <div class="container">
                 <h1 class="titulo">CADASTRAR-SE</h1>
+                <span class="cadastro_erro"></span>
                 <div class="form_cadastro">
                         <div class="input_container">
-                            <label for="nome_cadastro">Nome:</label>
-                            <input id="nome_cadastro" type="text" >
+                            <input id="nome_cadastro" type="text" placeholder="Nome">
                         </div>
 
 
                         <div class="input_container">
-                            <label for="email_cadastro">E-mail:</label>
-                            <input id="email_cadastro" type="text" >
+                            <input id="email_cadastro" type="text" placeholder="E-mail">
                         </div>
 
                         <div class="input_container">
-                            <label for="senha_cadastro">Senha:</label>
-                            <input id="senha_cadastro" type="password" >
+                            <input id="senha_cadastro" type="password" placeholder="Senha">
                         </div>
 
 
                         <div class="input_container">
-                            <label for="confirmacao_senha_cadastro">Confirmação da Senha:</label>
-                            <input id="confirmacao_senha_cadastro" type="password" >
+                            <input id="confirmacao_senha_cadastro" type="password" placeholder="Confirmaçã da senha">
                         </div>
                         <div class="log-acess acess">
                             <p>Já possui um cadastro?</p>
@@ -87,140 +94,5 @@
 <script>
 
 
-    function entrar() {
-        aguardar();
-
-        var emailVar = email_entrar.value;
-        var senhaVar = senha_entrar.value;
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
-        if (emailVar == "" || senhaVar == "") {
-            window.alert("Preencha todos os campos para prosseguir!");
-            finalizarAguardar();
-            return false;
-        }
-
-        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
-            finalizarAguardar();
-            return false;
-        }
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id_usuario;
-                    
-                    setTimeout(function () {
-                        window.location = "./index.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function cadastrar() {
-        aguardar();
-
-        var nomeVar = nome_cadastro.value;
-        var emailVar = email_cadastro.value;
-        var senhaVar = senha_cadastro.value;
-        var confirmacaoSenhaVar = confirmacao_senha_cadastro.value;
-
-        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-
-            window.alert("Preencha todos os campos para prosseguir!");
-            if (nomeVar == "") {
-                console.log('nome está em branco')
-            }
-            if (emailVar == "") {
-                console.log('email está em branco')
-            }
-            if (senhaVar == "") {
-                console.log('senha está em branco')
-            }
-            if (confirmacaoSenhaVar == "") {
-                console.log('confirmacaoSenha está em branco')
-            }
-            finalizarAguardar();
-            return false;
-        }
-
-        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-            window.alert("Ops, e-mail inválido! Verifique e tente novamente.");
-            finalizarAguardar();
-            return false;
-        }
-
-        if (senhaVar != confirmacaoSenhaVar) {
-            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
-            finalizarAguardar();
-            return false;
-        }
-
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                window.alert("Cadastro realizado com sucesso!");
-                logAcess();
-                window.alert("Realize o login!");
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
-        return false;
-    }
 
 </script>

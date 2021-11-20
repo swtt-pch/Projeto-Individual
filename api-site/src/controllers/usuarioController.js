@@ -37,16 +37,13 @@ function entrar(req, res) {
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
-                    console.log(`\nResultados encontrados: ${resultado.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-
                     if (resultado.length == 1) {
                         console.log(resultado);
                         res.json(resultado[0]);
                     } else if (resultado.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                        res.status(403).send("Já existe esse usuario");
                     }
                 }
             ).catch(
@@ -72,11 +69,23 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
         usuarioModel.cadastrar(nome, email, senha)
             .then(
                 function (resultado) {
-                    res.json(resultado);
+                    console.log(resultado);
+                    usuarioModel.entrar(email, senha) 
+                        .then(function(resultado){
+                            if (resultado.length == 1) {
+                                console.log(resultado);
+                                res.status(200).json(resultado);
+                            } else if (resultado.length == 0) {
+                                res.status(403).send("Email e/ou senha inválido(s)");
+                            } else {
+                                res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                            }
+                        }).catch(function(erro){
+                            console.log(erro)
+                        })
                 }
             ).catch(
                 function (erro) {

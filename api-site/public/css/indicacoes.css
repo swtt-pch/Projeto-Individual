@@ -3,80 +3,6 @@ section {
     height: calc(100vh - 140px) !important;
 }
 
-.background{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 3;
-    background: #0d0d0d9b;
-    visibility: hidden;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-}
-
-.alert{
-    display: flex;
-    width: 528px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 5px;
-    background: #e9e6e6;
-    transition: 0.5s;
-    padding: 0 20px;
-}
-
-.alert h1 {
-    margin: 20px auto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 36px;
-    text-align: center;
-    color: #263238;
-}
-
-.alert p {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    text-align: center;
-    color: #263238;
-    margin: 20px auto;
-}
-
-.alert br{
-    margin: 10px 0;
-}
-
-.alert a {
-    display: block;
-    text-decoration: none;
-    width: auto;
-    margin: 20px 10px;
-    background-color: #414141;
-    border: none;
-    border-radius: 10px;    
-    font-style: normal;
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 24px;
-    text-align: center;
-    color: #FFFFFF;
-    transition: 0.2s;
-    padding: 5px 30px;
-}
-
-.alert a:hover{
-    background-color:#FF8E3C;
-}
-
 
 .container{
     position: relative;
@@ -111,6 +37,7 @@ section {
     font-size: 20px;
     color: #000000;
 }
+
 .form #subtitulo1, #subtitulo2 {
     width: 100%;
 }
@@ -154,8 +81,6 @@ section {
 .form .input-box #bairro_input, #cidade_input{
     width: 282px;
 }
-
-
 
 .form select{
     border: 0 none;

@@ -39,14 +39,6 @@ function limparSessao() {
     window.location = "../index.html";
 }
 
-// carregamento (loading)
-function aguardar() {
-
-    /* old one */
-    //var divAguardar = document.getElementById("div_aguardar");
-    //divAguardar.style.display = "flex";
-}
-
 function finalizarAguardar(texto) {
     var divAguardar = document.getElementById("div_aguardar");
     divAguardar.style.display = "none";
@@ -69,3 +61,19 @@ function fecharModal() {
     divModal.style.display = "none";
 }
 
+function buscarDados(x) {
+    fetch(`https://viacep.com.br/ws/${x}/json/`)
+    .then(function(resultado) {
+        resultado.json()
+        .then(function(json){
+            console.log(json)
+            document.getElementById('logradouro_input').value = json.logradouro
+            document.getElementById('bairro_input').value = json.bairro
+            document.getElementById('cidade_input').value = json.localidade
+            document.getElementById('uf_input').value = json.uf
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
+    })
+}

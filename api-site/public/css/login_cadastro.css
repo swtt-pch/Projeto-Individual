@@ -62,92 +62,38 @@ section {
     transition: 5s;
 }
 
-.cadastro{
-    background-color: rgba(255, 142, 60, 0.6);
-    width: 100%;
-    height: 320px;
-    overflow-y: visible;
-    margin-left: -100%;
-    position: absolute;
-    transition: 2s;
+section .input_container{
+    position: relative;
+    width: 330px;
+    height: 30px;
 }
 
-.cadastro .titulo{
-    position: absolute;
-    top: -40px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 35px;
-    line-height: 44px;
+section input{
+    width: 300px;
+    padding: 0 15px;
+    border: 0;
+    height: 30px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: 3px solid #B2B6BB;
+    outline: none;
+    font-size: 18px;
+    font-weight: 100;
+    transition: 0.2s;
+}
+
+.input_container:hover > input{
+    border-bottom: 3px solid #21252B;
+}
+
+.input_container:hover > ::placeholder{
     color: #21252B;
 }
 
-.cadastro img{
-    position: absolute;
-    bottom: -30px;
-    left: 80px;
-    overflow-y: visible;
-    width: 650px;
+.input_container::placeholder{
+    color: #B2B6BB;
 }
 
-.cadastro .container {
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-    overflow-y: visible;
-}
-
-.cadastro .container .form_cadastro{
-    display: flex;
-    height: 100%;
-    width: 330px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-right: 0;
-    align-content: space-around;
-    align-items: flex-start;
-}
-
-
-.cadastro .container .form_cadastro button {
-    width: 137px;
-    height: 47px;
-    background: #3F4249;
-    border-radius: 5px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 15px;
-    text-align: center;
-    color: #DADDDF;
-}
-
-.cadastro .container .form_cadastro .log-acess{
-    width: 140px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.cadastro .container .form_cadastro .log-acess p{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    color: #000000;
-}
-
-.cadastro .container .form_cadastro .log-acess a{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    color: #80471F;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.cadastro .container .form_cadastro .log-acess a:hover{
-    font-weight: bold;
-}
 
 .login{
     width: 100%;
@@ -155,7 +101,7 @@ section {
     overflow-y: visible;
     position: relative;
     background-color: rgba(255, 142, 60, 0.6);
-    transition: 2s;
+    transition: 1.5s;
 }
 
 
@@ -175,6 +121,15 @@ section {
     font-size: 35px;
     line-height: 44px;
     color: #21252B;
+}
+
+.login .login_erro{
+    position: absolute;
+    top: 35px;
+    width: 330px;
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 
 .login .container {
@@ -198,9 +153,11 @@ section {
 }
 
 .login .container .form_login button{
+    appearance: none;
     width: 137px;
-    height: 47px;
+    height: 40px;
     background: #3F4249;
+    border: none;
     border-radius: 5px;
     font-style: normal;
     font-weight: 300;
@@ -208,6 +165,16 @@ section {
     line-height: 15px;
     text-align: center;
     color: #DADDDF;
+    transition: color 0.2s linear, 0.1s;
+}
+
+.login .container .form_login button:hover{
+    color: #ff8e3c;
+}
+
+.login .container .form_login button:active{
+    width: 142px;
+    height: 45px;
 }
 
 .login .container .form_login .cad-acess{
@@ -236,28 +203,112 @@ section {
     font-weight: bold;
 }
 
-section .input_container{
-    position: relative;
-    width: 330px;
-    height: 40px;
-}
-
-.input_container label{
+.cadastro{
+    background-color: rgba(255, 142, 60, 0.6);
+    width: 100%;
+    height: 320px;
+    overflow-y: visible;
+    margin-left: -100%;
     position: absolute;
-    bottom: 15px;
-    left: 15px;
-    color: #B2B6BB;
+    transition: 2s;
 }
 
-section input{
+.cadastro .titulo{
+    position: absolute;
+    top: -40px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 44px;
+    color: #21252B;
+}
+
+.cadastro .cadastro_erro{
+    position: absolute;
+    top: 17px;
     width: 330px;
-    padding: 0 0;
-    border: 0;
-    height: 40px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 3px solid #B2B6BB;
-    outline: none;
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 
 
+.cadastro img{
+    position: absolute;
+    bottom: -30px;
+    left: 80px;
+    overflow-y: visible;
+    width: 650px;
+}
+
+.cadastro .container {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    overflow-y: visible;
+    align-items: center;
+}
+
+.cadastro .container .form_cadastro{
+    display: flex;
+    height: 80%;
+    width: 330px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: 0;
+    align-content: space-around;
+    align-items: flex-start;
+}
+
+
+.cadastro .container .form_cadastro button {
+    appearance: none;
+    width: 137px;
+    height: 40px;
+    background: #3F4249;
+    border: none;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 15px;
+    text-align: center;
+    color: #DADDDF;
+    transition: color 0.2s linear, 0.1s;
+}
+
+.cadastro .container .form_cadastro button:hover{
+    color: #ff8e3c;
+}
+
+.cadastro .container .form_cadastro button:active{
+    width: 142px;
+    height: 45px;
+}
+
+.cadastro .container .form_cadastro .log-acess{
+    width: 140px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cadastro .container .form_cadastro .log-acess p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #000000;
+}
+
+.cadastro .container .form_cadastro .log-acess a{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #80471F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cadastro .container .form_cadastro .log-acess a:hover{
+    font-weight: bold;
+}
