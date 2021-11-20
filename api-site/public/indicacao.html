@@ -10,6 +10,18 @@
     <script src="./js/funcoes.js"></script>
 </head>
 <body onload="validarSessao()">
+    <div class="background">
+        <div class="alert">
+            <h1>INDICAÇÃO FEITA!!!</h1>
+            <p>
+                Muito obrigado por indicar esse evento!!! <br>
+                Ele foi armazenado em meu banco de dados e poderá ser o próximo local que visitarei. <br>
+                Sinta-se a vontadade para volrar ara a página inicial ou ir para a pagina de eventos.
+            </p>
+            <a href="index.html">INICIO</a> <a href="./eventos.html">EVENTOS</a>
+        </div>
+    </div>
+
     <header>
         <div class="gelo">
             <div class="container">
@@ -25,8 +37,8 @@
             <div class="container">
                 <div class="acessos">
                     <ul>
-                        <li class="visitas"><a class="a_visita" href="./eventos.html">VISITAS</a></li>
-                        <li><a class="a_indicacao" href="./indicacao.html">INDICAÇÃO</a></li>
+                        <li class="inicio"><a href="./index.html">INICIO</a></li>
+                        <li><span class="selected">INDICAÇÃO</span></li>
                         <li id="h1_usuario"><a href="./">ENTRAR / CADASTRAR</a></li>
                     </ul>
                 </div>
@@ -47,15 +59,15 @@
                     <div class="input-box">
                         <select name="tipo_input" id="tipo_input">
                             <option value="" disabled selected>*Tipo de evento</option>
-                            <option value="Concertos/Shows">Concertos/Shows</option>
-                            <option value="Exposições/Museus">Exposições/Museus</option>
-                            <option value="Restaurantes/Cafeterias">Restaurantes/Cafeterias</option>
-                            <option value="Livrarias/Estreias">Livrarias/Estreias</option>
+                            <option value="1">Concertos/Shows</option>
+                            <option value="2">Exposições/Museus</option>
+                            <option value="3">Restaurantes/Cafeterias</option>
+                            <option value="4">Livrarias/Estreias</option>
                         </select>
                     </div>
                     <h2 id="subtitulo2">Localização</h2>
                     <div class="input-box">
-                        <input type="text" id="cep_input" name="cep_input" placeholder="*CEP">
+                        <input type="text" id="cep_input" name="cep_input" placeholder="*CEP" onchange="buscarDados(this.value)">
                     </div>
                     <div class="input-box">
                         <input type="text" id="logradouro_input" name="logradouro_input" placeholder="*Rua">
@@ -97,6 +109,24 @@
 </html>
 <script>
 
+    function buscarDados(x) {
+        fetch(`https://viacep.com.br/ws/${x}/json/`)
+        .then(function(resultado) {
+            resultado.json()
+            .then(function(json){
+                console.log(json)
+                document.getElementById('logradouro_input').value = json.logradouro
+                document.getElementById('bairro_input').value = json.bairro
+                document.getElementById('cidade_input').value = json.localidade
+                document.getElementById('uf_input').value = json.uf
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+        })
+    }
+
+
     function teste(){
 
         fetch(`indicacoes/`).then(function(resposta){
@@ -116,7 +146,11 @@
             numero: numero_input.value
         }
 
-        console.log(corpo)
+        corpo.cep = corpo.cep.replace(/[^\d]+/g,'')
+        console.log(corpo.cep);
+        if(corpo.valor == ""){
+            corpo.valor = 0.00
+        }
 
         fetch(`/indicacoes/inserir/${idUsuario}`, {
             method: "post",
@@ -129,8 +163,7 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "eventos.html";
+                document.querySelector(".background").style.visibility = "visible"
                 
             }else if (resposta.status == 404) {
                 window.alert("Deu 404!"); 
@@ -148,4 +181,6 @@
             return false;
         }
     }
+
+    
 </script>

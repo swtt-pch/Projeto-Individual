@@ -19,8 +19,16 @@ router.get("/exibirComentarios/:idPost", function(req,res) {
     eventoController.exibirComentarios(req, res);
 })
 
+router.get("/contarComentarios/:idPost", function(req,res) {
+    eventoController.contarComentarios(req, res);
+})
+
 router.get("/mostrarGostou/:idUsuario,:idPost", function(req,res) {
     eventoController.mostrarGostou(req, res);
+})
+
+router.get("/exibirGaleria/:idPost", function(req,res) {
+    eventoController.exibirGaleria(req, res);
 })
 
 router.post("/gostei", function(req,res) {

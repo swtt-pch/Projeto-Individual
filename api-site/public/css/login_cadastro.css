@@ -257,6 +257,7 @@ section input{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: 3px solid #B2B6BB;
+    outline: none;
 }
 
 

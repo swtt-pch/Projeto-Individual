@@ -9,14 +9,14 @@ function inserirEvento(nome, tipo, cep, numero) {
 
 function inserirIndicacao(usuario, valor, evento) {
     var instrucao = `
-    insert into indicacao(id_usuario, valor, id_evento) value (${usuario}, ${valor}, ${evento});
+        insert into indicacao(id_usuario, valor, id_evento) value (${usuario}, ${valor}, ${evento});
     `;
     return database.executar(instrucao)
 }
 
-function retornoEvento(nome, tipo, cep) {
+function retornoEvento(titulo, tipo, cep) {
     var instrucao = `
-    select * from evento where titulo = '${nome}' and tipo = '${tipo}' and cep = '${cep}'  order by id_evento desc limit 1;
+    select * from evento where titulo = '${titulo}' and tipo = '${tipo}' and cep = '${cep}'  order by id_evento desc limit 1;
     `;
     return database.executar(instrucao)
 }

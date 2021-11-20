@@ -5,81 +5,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js/like.js"></script>
+    <script src="js/evento.js"></script>
+    <script src="./js/funcoes.js"></script>
+    <link rel="stylesheet" href="./css/main-style.css">
+    <link rel="stylesheet" href="./css/detalhes.css">
 </head>
-<body >
+<body onload="exibirDetalhes()">
+    <header>
+        <div class="gelo">
+            <div class="container">
+                <div class="goback" onclick="window.location = './index.html'">
+                    <div id="img">
     
+                    </div>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+        </div>
+        <div class="laranja">
+            <div class="container">
+                <div class="acessos">
+                    <ul>
+                        <li class="inicio"><a href="./index.html">INICIO</a></li>
+                        <li><a class="a_indicacao" href="./indicacao.html">INDICAÇÃO</a></li>
+                        <li id="h1_usuario"><a href="./">ENTRAR / CADASTRAR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="column-1">
+                <div class="galeria">
+                    <h1 class="titulos">Galeria</h1>
+                    <div class="content galeria_imagens">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="column-2">
+                <div class="post">
+                    <div class="titulo-box">
+                        <button><div class="heart" id="heart"></div></button>
+                        <h1 class="titulos" id="titulo_post">$$$$</h1>
+                    </div>
+                    <div class="content" id="content-detalhes">
+                        
+                    </div>
+                </div>
+                <div class="comentarios">
+                    <h1 class="titulos" id="zero_comentarios"><span id="qtd_comentarios"></span> comentarios</h1>
+                    <div class="content">
+                        <input onclick="mostrarButton()" id="comentario_input" class="comentario_input" maxlength="200" placeholder="Adicione um comentário publico..."></input>
+                        <div class="button-box"><button id="cancelar_button" onclick="ocutarButton()">Cancelar</button><button id="comentar_button" onclick="checar()">Comentar</button></div>
+                        <div id="comentarios">
 
-    <textarea id="comentario_input" name="comentario_input" rows="5" cols="33" maxlength="200"></textarea>
-    <button onclick="comentar()">Comentar</button>
-    <div id="comentarios"></div>
-    <div onload="exibirDetalhes(this, sessionStorage.ID_USUARIO, sessionStorage.ID_POST)" id="heart" style="width: 100px; height: 100px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>Criado por Igor Gomes </p>
+                <ul>
+                    <li><a href="https://www.instagram.com/swttpch/"><div id="insta" ></div></a></li>
+                    <li><a href="mailto:i.greygomes3@outlook.com"><div id="email" ></div></a></li>
+                    <li><a href="https://github.com/swtt-pch/"><div id="git" ></div></a></li>
+                    <li><a href="https://www.linkedin.com/in/igorluizgomes3/"><div id="linked"></div></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 <script>
+    validarSessao()
 
-    function comentar(){
+    function mostrarButton() {
+        let div_button = document.querySelector('.button-box')
+        div_button.style.visibility = 'visible'
+    }
+
+    function ocutarButton() {
+        let div_button = document.querySelector('.button-box')
+        div_button.style.visibility = 'hidden'
+    }
+
+    function checar() {
+        ocutarButton()
         var comentarioVar = document.getElementById("comentario_input").value
-        var idVar = sessionStorage.ID_USUARIO
-        var postVar = sessionStorage.ID_POST
-        fetch("usuarios/comentar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                comentarioServer: comentarioVar,
-                idServer: idVar,
-                postServer: postVar
-            })
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                window.location = "detalhes.html";
-            }else {
-                throw ("Houve um erro ao tentar comentar");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+
+        if(comentarioVar != ""){
+            comentar()
+        }
     }
-
-    function exibirDetalhes(){
-        var idPost = sessionStorage.ID_POST;
-        fetch(`/eventos/detalhar/${idPost}`).then(function(resposta){
-            resposta.json().then(function(resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i]
-                    document.body.innerHTML+= `<p>${publicacao}</p>`
-                }
-            }).catch(
-                function(erro){
-                    console.log(erro)
-                }
-            )
-        })
-
-        exibirComentarios();
-        mostrarGostou();
-    }
-
-    function exibirComentarios() {
-        var idPost = sessionStorage.ID_POST;
-        fetch(`/eventos/exibirComentarios/${idPost}`).then(function(resposta){
-            resposta.json().then(function(resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                document.getElementById("comentarios").innerHTML = ""
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i]
-                    document.getElementById("comentarios").innerHTML+= `<p><b>${publicacao.nome}(${publicacao.quando}): </b>${publicacao.comentario}</p>`
-                }
-            }).catch(
-                function(erro){
-                    console.log(erro)
-                }
-            )
-        })
-    }   
-
     
 </script>

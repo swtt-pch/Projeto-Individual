@@ -8,13 +8,13 @@ function testar(req, res) {
 
 function inserir(req,res){
 
-    console.log("ENTRAMOS NO indicacaoController INSERIR");
     var nome = req.body.nome
-    var valor = req.body.valor
+    var valor = req.body.valor;
     var tipo = req.body.tipo
     var cep = req.body.cep
     var numero = req.body.numero
     var usuario = req.params.idUsuario
+    console.log(valor)
     if(nome == undefined){
         res.status(400).send("Nome é undefined")
     } else if(tipo == undefined){
@@ -28,10 +28,15 @@ function inserir(req,res){
     }
     else{
         indicacaoModel.inserirEvento(nome, tipo, cep, numero)
-        .then(indicacaoModel.retornoEvento(nome, tipo, cep)
+        .then( function(resposta) {
+            console.log(resposta);
+            indicacaoModel.retornoEvento(nome, tipo, cep)
             .then(function (resposta){
-                console.log(resposta[0].id_evento)
                 let evento = resposta[0].id_evento
+                console.log(evento);
+                if (valor == undefined) {
+                    valor = 0.0
+                }
                 indicacaoModel.inserirIndicacao(usuario, valor, evento)
                     .then(function(resultado){
                         res.status(200).json(resultado);
@@ -47,7 +52,7 @@ function inserir(req,res){
                     console.log("erro ao consultar evento");
                     res.status(500).json(erro.sqlMessage);
                 }
-            )
+            )}
         ).catch(
             function(erro) {
                 console.log(erro)

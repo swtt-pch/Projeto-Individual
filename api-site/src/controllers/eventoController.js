@@ -19,6 +19,21 @@ function listar(req,res) {
     });
 }
 
+function listar(req,res) {
+    eventoModel.listar().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os gosteis: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function detalhar(req, res) {
     var idPost = req.params.idPost
     if(idPost == undefined){
@@ -26,7 +41,7 @@ function detalhar(req, res) {
     }
     eventoModel.detalhar(idPost).then(function (resultado) {
         if (resultado.length == 1) {
-            res.status(200).json(resultado);
+            res.status(200).json(resultado[0]);
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }
@@ -37,12 +52,50 @@ function detalhar(req, res) {
     });
 }
 
+function contarComentarios(req, res) {
+    var idPost = req.params.idPost
+    if(idPost == undefined){
+        res.status(400).send("o id do post é undefined")
+    }else{
+        eventoModel.contarComentarios(idPost).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
 function exibirComentarios(req, res) {
     var idPost = req.params.idPost
     if(idPost == undefined){
         res.status(400).send("o id do post é undefined")
     }else{
         eventoModel.exibirComentarios(idPost).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
+}
+
+function exibirGaleria(req, res) {
+    var idPost = req.params.idPost
+    if(idPost == undefined){
+        res.status(400).send("o id do post é undefined")
+    }else{
+        eventoModel.exibirGaleria(idPost).then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
             } else {
@@ -87,6 +140,7 @@ function gostei(req, res) {
         res.status(400).send("o id do post é undefined")
     } else {
         eventoModel.inserirGostei(id, post).then(function (resultado) {
+            console.log(resultado[0].gostei);
             res.status(200).json(resultado);
         }).catch(function (erro) {
             console.log(erro);
@@ -140,5 +194,7 @@ module.exports = {
     mostrarGostou,
     gostei,
     ngostei,
-    sgostei
+    sgostei,
+    contarComentarios,
+    exibirGaleria
 }

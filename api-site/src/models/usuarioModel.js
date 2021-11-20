@@ -29,7 +29,7 @@ function cadastrar(nome, email, senha) {
 
 function comentar(id, post, comentario) {
     var instrucao = `
-        insert comentario (comentario, id_usuario, id_post) value ("${comentario}", ${id}, ${post});
+        insert comentario (comentario, id_usuario, id_post, quando) value ("${comentario}", ${id}, ${post}, now());
     `;
     return database.executar(instrucao);
 }

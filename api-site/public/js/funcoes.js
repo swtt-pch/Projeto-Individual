@@ -12,7 +12,7 @@ function validarSessao() {
     if (email != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
         if (h1Usuario != undefined) {
-            h1Usuario.innerHTML ="<h1>Olá, " + nome + "!</h1>";
+            h1Usuario.innerHTML =`<a href="./eventos.html">EVENTOS</a>`;
         }
 
         if (indicacao != undefined) {

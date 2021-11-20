@@ -5,18 +5,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
-    <script src="js/like.js"></script>
+    <script src="js/evento.js"></script>
+    <script src="js/funcoes.js"></script>
     <link rel="stylesheet" href="./css/eventos.css">
     <link rel="stylesheet" href="./css/main-style.css">
 </head>
-<body onload="carregarEventos()">
-    <div class="viewCards">
-        
-    </div>
+<body onload="validarSessao()">
+    <header>
+        <div class="gelo">
+            <div class="container">
+                <div class="goback" onclick="window.location = './index.html'">
+                    <div id="img">
+    
+                    </div>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+        </div>
+        <div class="laranja">
+            <div class="container">
+                <div class="acessos">
+                    <ul>
+                        <li class="inicio"><a href="./index.html">INICIO</a></li>
+                        <li><a class="a_indicacao" href="./indicacao.html">INDICAÇÃO</a></li>
+                        <li class="visitas"><span class="selected">EVENTOS</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container" id="container-cards">
+            <h1>Conheça os eventos onde fui:</h1>
+            <div class="viewCards">
+            
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>Criado por Igor Gomes </p>
+                <ul>
+                    <li><a href="https://www.instagram.com/swttpch/"><div id="insta" ></div></a></li>
+                    <li><a href="mailto:i.greygomes3@outlook.com"><div id="email" ></div></a></li>
+                    <li><a href="https://github.com/swtt-pch/"><div id="git" ></div></a></li>
+                    <li><a href="https://www.linkedin.com/in/igorluizgomes3/"><div id="linked"></div></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 <script>
-
+    carregarEventos();
 
     function testar(){
         fetch(`eventos/`).then(function(resposta){
@@ -28,10 +70,11 @@
         fetch("/eventos/listar").then(function(resposta){
             if (resposta.ok) {
                 if(resposta.status == 204){
-                    document.body.innerHTML = "<h1>NENHUM POST ENCONTRADO</h1>"
-                }
-            }
-            resposta.json().then(function(resposta) {
+                    document.querySelector('#container-cards').innerHTML = "<h1>NENHUM POST ENCONTRADO</h1>"
+                    document.querySelector('footer').style = "margin-top: 0;"
+                    document.querySelector('header').style = "margin-bottom: 0;"
+                } else {
+                    resposta.json().then(function(resposta) {
                 console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                 var cards = document.querySelector('.viewCards')
@@ -44,11 +87,13 @@
                 for (let i = 0; i < resposta.length; i++) {
                     let publicacao = resposta[i]
                     let heart = document.getElementById(`heart${i}`)
-                    mostrarGostou(heart, parseInt(sessionStorage.ID_USUARIO), publicacao.id_post)
+                    mostrarGostou(heart, parseInt(sessionStorage.ID_USUARIO), publicacao.id_post, 'small')
                     //cards.innerHTML+= `<button onclick='detalharEvento(${publicacao.id_post})' >${publicacao.id_post}</button>`
                 }
 
             })
+                }
+            }
         })
     }
 
@@ -63,7 +108,7 @@
         let img = document.createElement('img')
         //temporario
         img.setAttribute('class', 'img')
-        img.src = './assets/imgs/teste.jpg'
+        img.src = `./assets/galeria/${publicacao.thumbnail}`
         let innerShadow = document.createElement('div')
         innerShadow.setAttribute('class', 'innershadow')
         let tituloCard = document.createElement('div')
@@ -82,5 +127,6 @@
         tituloCard.appendChild(t)
         cards.appendChild(card)
         img.setAttribute('onclick', `detalharEvento(${publicacao.id_post})`)
+        tituloCard.setAttribute('onclick', `detalharEvento(${publicacao.id_post})`)
     }
 </script>

@@ -1,0 +1,254 @@
+header{
+    margin-bottom: 30px;
+}
+
+section .container{
+    min-height: calc(100vh - 140px);
+    display: flex;
+}
+
+.content {
+    border-top: 3px solid #3F4249;
+    width: 80%;
+}
+
+.column-1{
+    width: 50%;
+}
+
+.comentarios, .post{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end
+}
+
+.galeria{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.galeria .content{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.galeria .content img{
+    width: 250px;
+    height: 330px;
+    margin-top: 40px;
+    filter: drop-shadow(5px 5px 50px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    opacity: 60%;
+    transition: 0.2s;
+}
+
+.galeria .content img:hover{
+    opacity: 100%;
+}
+
+.titulos{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 44px;
+    color: #3F4249;
+    width: 100%;
+}
+
+.column-2{
+    width: 50%;
+}
+
+.column-2 h1 {
+    text-align: end;
+}
+
+.post .content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post .content p{
+    margin-bottom: 10px;
+}
+
+.post_local{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: right;
+    color: #3F4249;
+    width: 100%;
+}
+
+.post_desc{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: right;
+    color: #000000;
+}
+
+.post_tipo{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 25px;
+    text-align: right;
+    color: #3F4249;
+    width: 100%;
+}
+
+#post_tipo{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: right;
+    color: #3F4249;
+}
+
+.post .titulos{
+    width: 80%;
+    font-size: 35px;
+    color: #80471F;
+}
+
+.titulo-box{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.titulo-box button{
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0 0 ;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+}
+
+.titulo-box .heart{
+    width: 60px;
+    height: 60px;
+    background-size:contain;
+    background: center;
+}
+
+.comentarios .content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.comentario_input{
+    width: 98.5%;
+    appearance: none;
+    border:none;
+    border-bottom: 1px solid #868A91;
+    margin-top: 30px;
+    outline: none;
+}
+
+.button-box{
+    width: 100%;
+    visibility: hidden;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.button-box button{
+    margin: 0 5px;
+    color: #FFF;
+    transition: 0.2s;
+}
+
+#cancelar_button{
+    border:none;
+    appearance: none;
+    border-radius: 2px;
+    background: #FFD9BD;
+    padding: 3px 10px;
+
+}
+
+#cancelar_button:hover{
+    background: #FF8E3C;
+}
+
+#comentar_button{
+    border:none;
+    appearance: none;
+    background: #8A8A8A;
+    border-radius: 2px;
+    padding: 3px 10px;
+}
+
+#comentar_button:hover{
+    background: #3F4249;
+}
+
+.comentario-card{
+    max-width: 460px;
+    background: rgba(255, 142, 60, 0.5);
+    border-radius: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 25px;
+    overflow-x: hidden;
+}
+
+.comentario-informacoes{
+    display: flex;
+    width: 93.3%;
+    padding: 0 18px;
+    height: 25px;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.comentario-informacoes h1{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    color: #80471F;
+}
+
+.comentario-informacoes span{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 13px;
+    color: #3F4249;
+}
+
+.comentario-texto{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    color: #000000;
+    width: 93.3%;
+    padding: 13px 18px;
+    text-align: start;
+    word-wrap: break-word;
+}
+
+footer{
+    margin-top: 30px;
+}

@@ -3,7 +3,7 @@ var database = require("../database/config");
 
 function detalhar(idPost) {
     var instrucao = `
-    select id_post, descricao, e.id_evento, titulo, tipo, cep, numero from post p inner join evento e on p.id_evento = e.id_evento where id_post = '${idPost}';
+    select id_post, descricao, e.id_evento as "id_evento", titulo, t.tipo as tipo, cep, numero from post p inner join evento e on p.id_evento = e.id_evento inner join tipo t on t.id_tipo = e.tipo where id_post = '${idPost}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -11,7 +11,7 @@ function detalhar(idPost) {
 
 function listar() {
     var instrucao = `
-    select p.id_post, e.id_evento, titulo from post p join evento e on p.id_evento = e.id_evento;
+    select thumbnail, p.id_post, e.id_evento, titulo from post p join evento e on p.id_evento = e.id_evento;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -19,11 +19,28 @@ function listar() {
 
 function exibirComentarios(idPost) {
     var instrucao = `
-    select nome, quando, comentario from comentario c inner join usuario u on c.id_usuario = u.id_usuario where id_post = ${idPost};
+    select nome, date_format(date(quando), "%d/%m/%Y") as quando, comentario from comentario c inner join usuario u on c.id_usuario = u.id_usuario where id_post = ${idPost};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 
+}
+
+function exibirGaleria(idPost) {
+    var instrucao = `
+    select link from galeria where id_post = ${idPost};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+function contarComentarios(idPost) {
+    var instrucao = `
+    select count(id_comentario) as quantos from comentario where id_post = ${idPost};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function mostrarGostou(id, post) {
@@ -36,7 +53,7 @@ function mostrarGostou(id, post) {
 
 function inserirGostei(id, post) {
     var instrucao = `
-        insert gostei value (${id}, ${post}, true);
+        insert gostei value (${id}, ${post}, 1);
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -65,5 +82,7 @@ module.exports = {
     mostrarGostou,
     inserirGostei,
     updatesGostei,
-    updatenGostei
+    updatenGostei,
+    contarComentarios,
+    exibirGaleria
 }
