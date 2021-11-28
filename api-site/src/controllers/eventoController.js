@@ -5,19 +5,6 @@ function testar(req, res) {
     res.send("ENTRAMOS NO indicacaoCONTROLLER");
 }
 
-function listar(req,res) {
-    eventoModel.listar().then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar os gosteis: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 
 function listar(req,res) {
     eventoModel.listar().then(function (resultado) {
@@ -32,7 +19,6 @@ function listar(req,res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
 
 function detalhar(req, res) {
     var idPost = req.params.idPost
@@ -140,7 +126,6 @@ function gostei(req, res) {
         res.status(400).send("o id do post é undefined")
     } else {
         eventoModel.inserirGostei(id, post).then(function (resultado) {
-            console.log(resultado[0].gostei);
             res.status(200).json(resultado);
         }).catch(function (erro) {
             console.log(erro);

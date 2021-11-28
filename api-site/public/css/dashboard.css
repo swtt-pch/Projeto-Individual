@@ -1,0 +1,44 @@
+section{
+    width: 100%;
+    height: calc(100vh - 140px);
+}
+
+section .container{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cards{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card{
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+}
+
+.card p{
+    font-size: 20px;
+}
+
+.card .number{
+    font-size: 100px;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    color: #ff8e3c;
+    line-height: 0;
+}

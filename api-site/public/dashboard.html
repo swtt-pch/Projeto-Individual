@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main-style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/funcoes.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body onload="validarSessao()">
+    <header>
+        <div class="gelo">
+            <div class="container">
+
+            </div>
+        </div>
+        <div class="laranja">
+            <div class="container">
+                <div class="acessos">
+                    <ul id="nav_bar_list">
+                        <li class="inicio"><a href="./index.html">INÍCIO</a></li>
+                        <li><a class="a_indicacao" href="./indicacao.html">INDICAÇÃO</a></li>
+                        <li id="h1_usuario"><a href="./">ENTRAR / CADASTRAR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="chart-container" style="position: relative; height:400px; width:400px">
+                <canvas id="myChart" width="400" height="300" style="width: 400px; height: 400px;"></canvas>
+            </div>
+            <div class="cards">
+                <div class="card card_one">
+                    <p>Você curtiu:</p>
+                    <p class="number" id="likes"></p>
+                    <p>publicações</p>
+                </div>
+                <div class="card card_two">
+                    <p>Você comentou:</p>
+                    <p class="number" id="coments"></p>
+                    <p>publicações</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <p>Criado por Igor Gomes </p>
+                <ul>
+                    <li><a href="https://www.instagram.com/swttpch/">
+                            <div id="insta"></div>
+                        </a></li>
+                    <li><a href="mailto:i.greygomes3@outlook.com">
+                            <div id="email"></div>
+                        </a></li>
+                    <li><a href="https://github.com/swtt-pch/">
+                            <div id="git"></div>
+                        </a></li>
+                    <li><a href="https://www.linkedin.com/in/igorluizgomes3/">
+                            <div id="linked"></div>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+    iniciarGrafico()
+    iniciarLikes()
+    iniciarComents()
+</script>

@@ -34,9 +34,10 @@ function comentar(id, post, comentario) {
     return database.executar(instrucao);
 }
 
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    comentar
+    comentar,
 };

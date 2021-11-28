@@ -52,7 +52,6 @@ function buscarDados(x) {
     .then(function(resultado) {
         resultado.json()
         .then(function(json){
-            console.log(json)
             document.getElementById('logradouro_input').value = json.logradouro
             document.getElementById('bairro_input').value = json.bairro
             document.getElementById('cidade_input').value = json.localidade

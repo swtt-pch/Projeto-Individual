@@ -143,11 +143,11 @@ function cadastrar() {
             
             if (resposta.status == 200) {
                 resposta.json().then(json => {
-                    console.log(json);
+                    console.log(json[0].email, json[0].nome, json[0].id_usuario)
                     console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id_usuario;
+                    sessionStorage.EMAIL_USUARIO = json[0].email;
+                    sessionStorage.NOME_USUARIO = json[0].nome;
+                    sessionStorage.ID_USUARIO = json[0].id_usuario;
                     document.querySelector(".background").style.visibility = "visible"
                 });
 

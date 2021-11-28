@@ -53,7 +53,7 @@ function mostrarGostou(id, post) {
 
 function inserirGostei(id, post) {
     var instrucao = `
-        insert gostei value (${id}, ${post}, 1);
+        insert gostei value (${id}, ${post}, 1, now());
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -75,6 +75,18 @@ function updatenGostei(id, post) {
     return database.executar(instrucao);
 }
 
+function mostrarMaisIndicados() {
+    var instrucao = `
+        select ti.tipo as tipo, count(ev.tipo) as qtd from indicacao i
+        left join evento ev
+            on ev.id_evento = i.id_evento
+        join tipo ti
+            on ev.tipo = ti.id_tipo
+        group by ti.id_tipo;
+    `;
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listar,
     detalhar,
@@ -84,5 +96,6 @@ module.exports = {
     updatesGostei,
     updatenGostei,
     contarComentarios,
-    exibirGaleria
+    exibirGaleria,
+    mostrarMaisIndicados
 }

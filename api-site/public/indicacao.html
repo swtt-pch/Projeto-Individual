@@ -15,11 +15,11 @@
         <div class="alert">
             <h1>INDICAÇÃO FEITA!!!</h1>
             <p>
-                Muito obrigado por indicar esse evento!!! <br>
-                Ele foi armazenado em meu banco de dados e poderá ser o próximo local que visitarei. <br>
-                Sinta-se a vontadade para voltar ara a página inicial ou ir para a pagina de eventos.
+                Muito obrigado por indicar esse evento!!!<br>
+                Ele foi armazenado em meu banco de dados e poderá ser o próximo local que visitarei.<br>
+                Sinta-se a vontadade para voltar para a página inicial ou ir para a página de eventos.
             </p>
-            <a href="index.html">INICIO</a> <a href="./eventos.html">EVENTOS</a>
+            <a href="index.html">INÍCIO</a><a href="./eventos.html">EVENTOS</a>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
                     <div id="img">
     
                     </div>
-                    <span>Dashboard</span>
+                    <span><a href="./dashboard.html">Dashboard</a></span>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="container">
                 <div class="acessos">
                     <ul id="nav_bar_list">
-                        <li class="inicio"><a href="./index.html">INICIO</a></li>
+                        <li class="inicio"><a href="./index.html">INÍCIO</a></li>
                         <li><span class="selected">INDICAÇÃO</span></li>
                         <li id="h1_usuario"><a href="./">ENTRAR / CADASTRAR</a></li>
                     </ul>
@@ -111,8 +111,6 @@
 <script>
 
 
-
-
     function teste(){
 
         fetch(`indicacoes/`).then(function(resposta){
@@ -122,7 +120,7 @@
     }
 
     function publicar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
+        var idUsuario = sessionStorage.ID_USUARIO
 
         var corpo = {
             nome: nome_input.value,
@@ -133,7 +131,7 @@
         }
 
         corpo.cep = corpo.cep.replace(/[^\d]+/g,'')
-        console.log(corpo.cep);
+
         if(corpo.valor == ""){
             corpo.valor = 0.00
         }
@@ -145,20 +143,14 @@
             },
             body: JSON.stringify(corpo)
         }).then(function(resposta) {
-
             console.log("resposta: ", resposta);
-
             if (resposta.ok) {
                 document.querySelector(".background").style.visibility = "visible"
-                
-            }else if (resposta.status == 404) {
-                window.alert("Deu 404!"); 
             }else {
                 throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
         }).catch(function(resposta) {
             console.log(`#ERRO: ${resposta}`);
-            
         })
     }
 
