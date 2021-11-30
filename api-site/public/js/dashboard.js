@@ -58,3 +58,13 @@ function iniciarComents() {
                 })
         })
 }
+
+function iniciarIndications() {
+    fetch(`/dashboard/qtdIndicacoes/${sessionStorage.ID_USUARIO}`)
+    .then(resposta =>{
+        resposta.json()
+            .then(json =>{
+                document.getElementById('indications').innerHTML = json.qtd
+            })
+    })
+}

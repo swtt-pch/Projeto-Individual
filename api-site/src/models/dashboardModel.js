@@ -16,6 +16,14 @@ function qtdComentarios(id) {
     return database.executar(instrucao);
 }
 
+function qtdIndicacoes(id) {
+    var instrucao = `
+    select count(id_indicacao) as qtd from indicacao where id_usuario = ${id};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function maisIndicados() {
     var instrucao = `
         select ti.tipo, sum(ev.tipo) as qtd from indicacao i
@@ -32,5 +40,6 @@ function maisIndicados() {
 module.exports = {
     qtdCurtidas,
     qtdComentarios,
-    maisIndicados
+    maisIndicados,
+    qtdIndicacoes
 }

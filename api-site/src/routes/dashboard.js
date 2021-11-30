@@ -19,4 +19,9 @@ router.get(`/qtdComentarios/:idUsuario`, function(req, res) {
     dashboardController.qtdComentarios(req, res);
 })
 
+router.get(`/qtdIndicacoes/:idUsuario`, function(req, res) {
+    dashboardController.qtdIndicacoes(req, res);
+})
+
+
 module.exports = router;

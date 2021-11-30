@@ -27,6 +27,10 @@ router.get("/mostrarGostou/:idUsuario,:idPost", function(req,res) {
     eventoController.mostrarGostou(req, res);
 })
 
+router.get("/todosGostei/:idPost", function(req,res) {
+    eventoController.todosGostei(req, res);
+})
+
 router.get("/exibirGaleria/:idPost", function(req,res) {
     eventoController.exibirGaleria(req, res);
 })

@@ -49,16 +49,16 @@
     <section>
         <div class="container">
             <div class="form">
-                <h1>Conhece algum evento legal? Me indica ai!</h1>
+                <h1 id="erro">Conhece algum evento legal? Me indica ai!</h1>
                     <h2 id="subtitulo1">Informações do evento</h2>
                     <div class="input-box">
-                        <input type="text" id="nome_input" name="nome_input" placeholder="*Nome do evento">
+                        <input type="text" id="nome_input" name="nome_input" placeholder="*Nome do evento" onchange="checkName(this)">
                     </div>
                     <div class="input-box">
-                        <input type="text" id="valor_input" name="valor_input" placeholder="Valor">
+                        <input type="text" id="valor_input" name="valor_input" placeholder="Valor" onchange="turnGreen(this)">
                     </div>
                     <div class="input-box">
-                        <select name="tipo_input" id="tipo_input">
+                        <select name="tipo_input" id="tipo_input" onchange="turnGreen(this)">
                             <option value="" disabled selected>*Tipo de evento</option>
                             <option value="1">Concertos/Shows</option>
                             <option value="2">Exposições/Museus</option>
@@ -68,22 +68,25 @@
                     </div>
                     <h2 id="subtitulo2">Localização</h2>
                     <div class="input-box">
-                        <input type="text" id="cep_input" name="cep_input" placeholder="*CEP" onchange="buscarDados(this.value)">
+                        <input type="text" id="cep_input" name="cep_input" placeholder="*CEP" maxlength="9" onchange="buscarDados(this.value)">
                     </div>
                     <div class="input-box">
-                        <input type="text" id="logradouro_input" name="logradouro_input" placeholder="*Rua">
+                        <p id="informations" style="display: none;">O CEP informado não existe *</p>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="bairro_input" id="bairro_input" placeholder="*Bairro">
+                        <input type="text" id="logradouro_input" name="logradouro_input" placeholder="Rua" class="input-local" disabled>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="numero_input" id="numero_input" placeholder="*Número">
+                        <input type="text" name="bairro_input" id="bairro_input" placeholder="Bairro" class="input-local" disabled>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="cidade_input" id="cidade_input" placeholder="*Cidade">
+                        <input type="text" name="numero_input" id="numero_input" placeholder="Número" onchange="turnGreen(this)">
                     </div>
                     <div class="input-box">
-                        <input type="text" name="uf_input" id="uf_input" placeholder="*Estado">
+                        <input type="text" name="cidade_input" id="cidade_input" placeholder="Cidade" class="input-local" disabled>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="uf_input" id="uf_input" placeholder="Estado" class="input-local" disabled>
                     </div>
                 <button onclick="publicar()">Enviar</button>
             </div>
@@ -121,7 +124,19 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO
-
+        if (nome_input.value == "" || tipo_input.value == "" || cep_input.value == "") {
+            erro.innerHTML = "Preencha todos os campos obrigatórios!!";
+            if (nome_input.value == "") {
+                turnRed(nome_input)
+            }
+            if (tipo_input.value == "" ) {
+                turnRed(tipo_input)
+            }
+            if (cep_input.value == "") {
+                turnRed(cep_input)
+            }
+            return
+        }
         var corpo = {
             nome: nome_input.value,
             valor: valor_input.value,
@@ -132,9 +147,13 @@
 
         corpo.cep = corpo.cep.replace(/[^\d]+/g,'')
 
+
+
         if(corpo.valor == ""){
             corpo.valor = 0.00
         }
+
+        corpo.valor.replace(",",".")
 
         fetch(`/indicacoes/inserir/${idUsuario}`, {
             method: "post",

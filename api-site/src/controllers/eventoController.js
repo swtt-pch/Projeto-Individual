@@ -117,6 +117,16 @@ function mostrarGostou(req, res) {
     }
 }
 
+function todosGostei(req, res) {
+    var post = req.params.idPost;
+    eventoModel.todosGostei(post)
+        .then(function(resposta) {
+            res.status(200).json(resposta[0])
+        }).catch(function(erro) {
+            console.log(erro)
+        })
+}
+
 function gostei(req, res) {
     var id = req.body.idUsuario
     var post = req.body.idPost
@@ -181,5 +191,6 @@ module.exports = {
     ngostei,
     sgostei,
     contarComentarios,
-    exibirGaleria
+    exibirGaleria,
+    todosGostei
 }

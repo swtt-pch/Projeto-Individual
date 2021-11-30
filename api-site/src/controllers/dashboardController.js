@@ -37,9 +37,22 @@ function qtdComentarios(req, res) {
         })
 }
 
+function qtdIndicacoes(req, res) {
+    var id = req.params.idUsuario
+    dashboardModel.qtdIndicacoes(id)
+        .then(function(resposta) {
+            res.status(200).json(resposta[0])
+        }).catch(erro=>{
+            console.log(erro)
+            res.status(500).send("Deu erro!")
+        })
+}
+
+
 module.exports = {
     testar,
     maisIndicados,
     qtdCurtidas,
-    qtdComentarios
+    qtdComentarios,
+    qtdIndicacoes
 }

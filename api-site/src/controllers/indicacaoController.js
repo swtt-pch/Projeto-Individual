@@ -12,6 +12,7 @@ function inserir(req,res){
     if (valor == undefined || valor == "" || valor == null) {
         valor = 0.0
     }
+    valor = valor.toString().replace(",", ".")
     var tipo = req.body.tipo
     var cep = req.body.cep
     var numero = req.body.numero

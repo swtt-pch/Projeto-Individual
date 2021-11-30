@@ -116,15 +116,27 @@ section .container{
 }
 
 .post .titulos{
-    width: 80%;
+    width: 70%;
     font-size: 35px;
     color: #80471F;
 }
+
+
 
 .titulo-box{
     width: 80%;
     display: flex;
     justify-content: space-between;
+}
+
+.titulo-box p{
+    text-align: center;
+    align-self: flex-end;
+    font-size:45px;
+    color: #8A8A8A;
+    position: relative;
+    right:  25px;
+    bottom: 2px;
 }
 
 .titulo-box button{

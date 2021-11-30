@@ -51,6 +51,14 @@ function mostrarGostou(id, post) {
     return database.executar(instrucao);
 }
 
+function todosGostei(post) {
+    var instrucao = `
+        select sum(gostei) as qtd from gostei where id_post = ${post};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function inserirGostei(id, post) {
     var instrucao = `
         insert gostei value (${id}, ${post}, 1, now());
@@ -97,5 +105,6 @@ module.exports = {
     updatenGostei,
     contarComentarios,
     exibirGaleria,
-    mostrarMaisIndicados
+    mostrarMaisIndicados,
+    todosGostei
 }

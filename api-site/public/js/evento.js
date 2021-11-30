@@ -84,6 +84,7 @@ function exibirDetalhes(){
     exibirComentarios();
     mostrarGostou(heart, visitante, idPost, 'big');
     mostrarGaleria();
+    todosGostei();
 }
 
 function criarDetalhe(div, local, descricao, tipo) {
@@ -103,10 +104,6 @@ function criarDetalhe(div, local, descricao, tipo) {
     p_local.innerHTML= local
     p_desc.innerHTML = descricao
     span.innerHTML = tipo
-}
-
-function buscarCEP(x) {
-
 }
 
 function exibirComentarios() {
@@ -191,6 +188,7 @@ function mostrarGostou(heart, usuario, post, string) {
                         heart.style.background = `url(assets/icon/${s}hearton.png)`
                     } else if(resposta[0].gostei == []){
                     }
+                    todosGostei();
                 }).catch(
                     function(erro){
                         console.log(erro)
@@ -198,6 +196,17 @@ function mostrarGostou(heart, usuario, post, string) {
                     }
                 )
             }
+        })
+}
+
+function todosGostei() {
+    let post = sessionStorage.ID_POST
+
+    fetch(`./eventos/todosGostei/${post}`)
+        .then(function(resposta) {
+            resposta.json().then(j=>{
+                document.getElementById('qtd_likes').innerHTML = j.qtd
+            })
         })
 }
 
